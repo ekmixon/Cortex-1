@@ -18,9 +18,9 @@ pip3 install .
 
 
 def usage():
-    print(__file__ + " --list")
-    print(__file__ + " --info <misp-module>")
-    print(__file__ + " --run <misp-module>")
+    print(f"{__file__} --list")
+    print(f"{__file__} --info <misp-module>")
+    print(f"{__file__} --run <misp-module>")
 
 
 def run(argv):
@@ -29,7 +29,7 @@ def run(argv):
         opts, args = getopt.getopt(argv, 'lh:i:r:', ["list", "help", "info=", "run="])
     except getopt.GetoptError as err:
         usage()
-        print(str(err))
+        print(err)
         sys.exit(2)
 
     for opt, arg in opts:
@@ -40,7 +40,7 @@ def run(argv):
             sys.exit()
 
         elif opt in ('-l', '--list'):
-            modules = [m for m in modules if mhandlers['type:' + m] == "expansion"]
+            modules = [m for m in modules if mhandlers[f'type:{m}'] == "expansion"]
             print(json.dumps(modules))
             sys.exit(0)
 
